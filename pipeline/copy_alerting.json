@@ -25,6 +25,12 @@
 							"type": "BinaryReadSettings"
 						}
 					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						}
+					},
 					"enableStaging": false
 				},
 				"inputs": [
@@ -36,6 +42,12 @@
 							"folder": "dump",
 							"file_extension": ".csv"
 						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "BinarySink",
+						"type": "DatasetReference"
 					}
 				]
 			}
