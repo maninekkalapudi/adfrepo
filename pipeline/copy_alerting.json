@@ -47,7 +47,11 @@
 				"outputs": [
 					{
 						"referenceName": "BinarySink",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"container": "target",
+							"folder": "dump"
+						}
 					}
 				]
 			}
