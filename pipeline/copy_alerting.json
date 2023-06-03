@@ -39,7 +39,6 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"container": "raw",
-							"folder": "dump",
 							"file_extension": ".csv"
 						}
 					}
