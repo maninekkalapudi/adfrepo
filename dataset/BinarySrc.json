@@ -9,9 +9,6 @@
 			"container": {
 				"type": "string"
 			},
-			"folder": {
-				"type": "string"
-			},
 			"file_extension": {
 				"type": "string"
 			}
