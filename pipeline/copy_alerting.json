@@ -1,6 +1,45 @@
 {
 	"name": "copy_alerting",
 	"properties": {
+		"activities": [
+			{
+				"name": "Blob Copy",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "BinarySrc",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": "raw",
+							"folder": "dump",
+							"file_extension": ".csv"
+						}
+					}
+				]
+			}
+		],
 		"annotations": []
 	}
 }
