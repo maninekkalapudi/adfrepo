@@ -1,0 +1,9 @@
+{
+	"name": "mani-testing",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "f1dee914-8d55-4951-8b89-1c101fbf2c8a",
+		"tenantId": "90fe733d-6c15-4300-ba53-c8cfe381be10"
+	}
+}
