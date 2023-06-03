@@ -39,7 +39,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"container": "raw",
-							"file_extension": ".csv"
+							"file_extension": "haberman.csv"
 						}
 					}
 				],
