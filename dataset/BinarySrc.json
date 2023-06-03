@@ -22,10 +22,6 @@
 					"value": "@concat('*',dataset().file_extension)",
 					"type": "Expression"
 				},
-				"folderPath": {
-					"value": "@dataset().folder",
-					"type": "Expression"
-				},
 				"container": {
 					"value": "@dataset().container",
 					"type": "Expression"
