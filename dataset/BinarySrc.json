@@ -19,7 +19,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": {
-					"value": "@concat('*',dataset().file_extension)",
+					"value": "@dataset().file_extension",
 					"type": "Expression"
 				},
 				"container": {
