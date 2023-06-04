@@ -92,7 +92,7 @@
 									"parameters": {
 										"container": "raw",
 										"file_extension": {
-											"value": "@item()",
+											"value": "@item().name",
 											"type": "Expression"
 										}
 									}
