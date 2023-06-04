@@ -111,6 +111,34 @@
 						}
 					]
 				}
+			},
+			{
+				"name": "SendEmail",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "ForEach1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-08.eastus.logic.azure.com:443/workflows/ed993223ae4e4ad3b80dd8af8298aa4f/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=lr3NZIuYvcQV1EHpPxcWHcDTcHSFBb0vmajwV6uwPwg",
+					"method": "POST",
+					"body": {
+						"value": "{\n    \"message\" : \"Your pipeline with run ID @{pipeline().RunId} has failed!\",\n    \"dataFactoryName\" : \"@{pipeline().DataFactory}\", \n    \"pipelineName\" : \"@{pipeline().Pipeline}\", \n   }",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"annotations": []
