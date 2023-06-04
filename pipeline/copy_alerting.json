@@ -3,65 +3,6 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Blob Copy",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "GetFiles",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "BinarySource",
-						"storeSettings": {
-							"type": "AzureBlobStorageReadSettings",
-							"recursive": true
-						},
-						"formatSettings": {
-							"type": "BinaryReadSettings"
-						}
-					},
-					"sink": {
-						"type": "BinarySink",
-						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings"
-						}
-					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "BinarySrc",
-						"type": "DatasetReference",
-						"parameters": {
-							"container": "raw",
-							"file_extension": "haberman.csv"
-						}
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "BinarySink",
-						"type": "DatasetReference",
-						"parameters": {
-							"container": "target",
-							"folder": "dump"
-						}
-					}
-				]
-			},
-			{
 				"name": "GetFiles",
 				"type": "GetMetadata",
 				"dependsOn": [],
@@ -92,6 +33,83 @@
 					"formatSettings": {
 						"type": "BinaryReadSettings"
 					}
+				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "GetFiles",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('GetFiles').output.childItems",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Blob Copy",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "BinarySource",
+									"storeSettings": {
+										"type": "AzureBlobStorageReadSettings",
+										"recursive": true
+									},
+									"formatSettings": {
+										"type": "BinaryReadSettings"
+									}
+								},
+								"sink": {
+									"type": "BinarySink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "BinarySrc",
+									"type": "DatasetReference",
+									"parameters": {
+										"container": "raw",
+										"file_extension": {
+											"value": "@item()",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "BinarySink",
+									"type": "DatasetReference",
+									"parameters": {
+										"container": "target",
+										"folder": "dump"
+									}
+								}
+							]
+						}
+					]
 				}
 			}
 		],
